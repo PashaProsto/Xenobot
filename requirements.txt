@@ -1,0 +1,9 @@
+vosk
+sounddevice
+selenium
+fuzzywuzzy
+simpleaudio
+pyaudio
+pyyaml
+pyinstaller
+python-Levenshtein
