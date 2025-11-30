@@ -129,25 +129,32 @@ def find_best_match(text, word_list, threshold=60):
 def play_sound(sound_type):
     """Воспроизведение звуков"""
     sounds = {
-        'masya': ['masya.wav'], # TO DO
+        # 'masya': ['masya.wav'],  # TO DO
         'ready': ['ready.MP3'],
-        'wait': ['wait1.MP3'],
+        'wait': ['wait1.MP3'], 
         'wait2': ['wait2.MP3'],
         'success': ['success.WAV'],
         'error': ['error.MP3'],
-        'lev0u': ['lev0u.wav'],
-        'lev0u2': ['lev0u2.wav'], # TO DO
-        'stupid': ['stupid.wav'], # TO DO
+        'lev0u': ['lev0u.MP3'],
+        # 'lev0u2': ['lev0u2.wav'], # TO DO
+        # 'stupid': ['stupid.wav'], # TO DO
         'lockmean': ['lockmean.MP3'] 
     }
 
     if sound_type in sounds:
         sound_file = random.choice(sounds[sound_type])
         sound_path = os.path.join(SOUNDS_DIR, sound_file)
+        print(f"Пытаюсь воспроизвести: {sound_path}")  # Добавь для отладки
         if os.path.exists(sound_path):
-            wave_obj = sa.WaveObject.from_wave_file(sound_path)
-            play_obj = wave_obj.play()
-            play_obj.wait_done()
+            try:
+                wave_obj = sa.WaveObject.from_wave_file(sound_path)
+                play_obj = wave_obj.play()
+                play_obj.wait_done()
+                print(f"Воспроизведен: {sound_file}")  # Добавь для отладки
+            except Exception as e:
+                print(f"Ошибка воспроизведения {sound_file}: {e}")
+        else:
+            print(f"Файл не найден: {sound_path}")
 
 def execute_command(cmd_name):
     """Выполняет команду на основе распознанного названия"""
