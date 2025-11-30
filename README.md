@@ -1,9 +1,5 @@
 Xenobot - Голосовой помощник
 
-https://img.shields.io/badge/Xenobot-%D0%93%D0%BE%D0%BB%D0%BE%D1%81%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%BD%D0%B8%D0%BA-blueviolet
-https://img.shields.io/badge/Python-3.7%252B-green
-https://img.shields.io/badge/Windows-10%252B-success
-
 Голосовой помощник Xenobot, созданный на Python, который понимает голосовые команды и выполняет различные задачи на компьютере.
 
 Автоматическая установка (рекомендуется)
