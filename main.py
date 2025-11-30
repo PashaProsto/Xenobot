@@ -129,16 +129,16 @@ def find_best_match(text, word_list, threshold=60):
 def play_sound(sound_type):
     """Воспроизведение звуков"""
     sounds = {
-        'masya': ['masya.wav'],
-        'ready': ['ready.wav'],
-        'wait': ['wait1.wav', 'wait2.wav'],
+        'masya': ['masya.wav'], # TO DO
+        'ready': ['ready.MP3'],
+        'wait': ['wait1.MP3'],
+        'wait2': ['wait2.MP3'],
         'success': ['success.WAV'],
-        'error': ['error.wav'],
-        'not_found': ['not_found.wav'],
+        'error': ['error.MP3'],
         'lev0u': ['lev0u.wav'],
-        'lev0u2': ['lev0u2.wav'],
-        'stupid': ['stupid.wav'],
-        'lockmean': ['lockmean.MP3'],
+        'lev0u2': ['lev0u2.wav'], # TO DO
+        'stupid': ['stupid.wav'], # TO DO
+        'lockmean': ['lockmean.MP3'] 
     }
 
     if sound_type in sounds:
@@ -156,9 +156,11 @@ def execute_command(cmd_name):
     if cmd_name == 'open_browser':
         webbrowser.open('https://')
         masya_number = random.randint(1, 20)
-        if masya_number == 1:
-            play_sound('masya')
-            print('мася привет')
+        '''TO DO'''
+        # if masya_number == 1:
+        #     Sound.volume_set(100)
+        #     play_sound('masya')
+        #     print('мася привет')
         return "Открываю браузер"
 
     elif cmd_name == 'open_youtube':
@@ -231,6 +233,7 @@ def execute_command(cmd_name):
 def listen_for_activation():
     """Слушает активационную фразу используя расстояние Левенштейна"""
     print("Ожидаю активационную фразу...")
+    play_sound('wait')
 
     while True:
         data = stream.read(4000, exception_on_overflow=False)
@@ -246,8 +249,6 @@ def listen_for_activation():
             if best_match:
                 print(f"Активирован по слову: {best_match} (схожесть: {ratio}%)")
 
-                play_sound('wait')
-
                 # Функция от лёвы
                 lev0u = random.randint(1, 100)
                 if lev0u == 49:
@@ -258,6 +259,7 @@ def listen_for_activation():
 def listen_for_command():
     """Слушает команду после активации"""
     print("Слушаю команду...")
+    play_sound('wait2')
     start_time = time.time()
     timeout = 5
 
