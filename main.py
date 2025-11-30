@@ -15,6 +15,10 @@ import datetime
 from sound import Sound
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import pygame
+
+
+pygame.mixer.init()
 
 # Source - https://stackoverflow.com/a
 # Posted by tzadok, modified by community. See post 'Timeline' for change history
@@ -144,15 +148,23 @@ def play_sound(sound_type):
     if sound_type in sounds:
         sound_file = random.choice(sounds[sound_type])
         sound_path = os.path.join(SOUNDS_DIR, sound_file)
-        print(f"Пытаюсь воспроизвести: {sound_path}")  # Добавь для отладки
+        print(f"Пытаюсь воспроизвести: {sound_path}")
+        
         if os.path.exists(sound_path):
             try:
-                wave_obj = sa.WaveObject.from_wave_file(sound_path)
-                play_obj = wave_obj.play()
-                play_obj.wait_done()
-                print(f"Воспроизведен: {sound_file}")  # Добавь для отладки
+                if sound_path.lower().endswith('.mp3'):
+                    # Для MP3 файлов
+                    pygame.mixer.music.load(sound_path)
+                    pygame.mixer.music.play()
+                    while pygame.mixer.music.get_busy():
+                        pygame.time.Clock().tick(10)
+                else:
+                    # Для WAV файлов
+                    wave_obj = sa.WaveObject.from_wave_file(sound_path)
+                    play_obj = wave_obj.play()
+                    play_obj.wait_done()
             except Exception as e:
-                print(f"Ошибка воспроизведения {sound_file}: {e}")
+                print(f"Ошибка воспроизведения: {e}")
         else:
             print(f"Файл не найден: {sound_path}")
 
