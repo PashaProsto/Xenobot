@@ -181,9 +181,9 @@ def execute_command(cmd_name):
         os.system("start spotify:")
         return "Включаю музыку"
 
-    # elif cmd_name == 'lock_pc':
-    #     os.system("rundll32.exe user32.dll,LockWorkStation")
-    #     return "Блокирую компьютер"
+    elif cmd_name == 'lock_pc':
+        os.system("rundll32.exe user32.dll,LockWorkStation")
+        return "Блокирую компьютер"
 
     elif cmd_name == 'screenshot':
         subprocess.Popen(['snippingtool', '/clip'])
@@ -245,6 +245,7 @@ def listen_for_activation():
 
             if best_match:
                 print(f"Активирован по слову: {best_match} (схожесть: {ratio}%)")
+
                 play_sound('wait')
 
                 # Функция от лёвы
@@ -270,9 +271,13 @@ def listen_for_command():
             if command_text:
                 print(f"Команда: {command_text}")
                 success = va_respond(command_text)
+                lockmeanchik = random.randint(1,10000)
 
                 if success:
                     play_sound('success')
+                    return True
+                elif lockmeanchik == 6:
+                    play_sound('lockmean')
                     return True
                 else:
                     return False
